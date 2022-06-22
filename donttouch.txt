@@ -1,0 +1,223 @@
+#read the csv file 
+df = pd.read_csv(r'C:\XXX\Data\filename.csv',encoding='ISO-8859-1')
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#drop speicific columns by column number
+df.drop(df.columns[[9,11,13,15,17]], axis = 1, inplace = True)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Fill Zero where in columns
+#cols = ["Col1","col2","col3","col4"]
+df[cols] = df[cols].fillna(0)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Sum the column
+dftest = df["amount"].sum() 
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#crosstab
+dfcrstab=pd.crosstab(df.field1, columns=[df.field2], values=df.field3Amount,colnames=field4 ,aggfunc=sum)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Rename Column name
+df.rename(columns={"Testing field1":"TestFld1","Testing field2":"TestFld2"}, inplace=True)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Pivot
+df1=df.pivot_table(data=df,df.UserName, columns=df.Type, values=df.Amnt).reset_index()
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#merge
+df3=pd.merge(df1, df2, left_on='UserName from df1',right_on='UserName from df2', how='left')
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Export to CSV
+file_name = 'Test.csv'
+df3.to_csv(file_name)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Aggreigate all column value in list value under one group name
+df3 = df2.groupby('username', as_index=False).agg(list)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Get Index Key to column 
+df.reset_index(level=0, inplace=True)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+###SQLStart
+
+#Download Protable SQL 
+####SQLiteDatabaseBrowserPortable.exe
+
+#Import all library 
+import sqlite3
+import urllib
+import urllib.request
+
+import sqlite3
+conn = sqlite3.connect("TestDB")
+cur = conn.cursor()
+
+'UserMaster'
+cur.execute('CREATE TABLE IF NOT EXISTS Masterfile (field1 Text,field2 number,field3 TEXT,CreatedDate Date,LastModifiedDate Date,SalesforceUser Number)')
+conn.commit()
+'modified datatype '
+Masterfile .field2 = Masterfile.field2.astype('Int64').astype(str)  
+
+'Load to SQLite3 -> Check in portable'
+Masterfile.to_sql('Masterfile', conn, if_exists='replace', index = False)
+
+
+'Update  PrsnTypeQuota in UserMaster'
+cur.execute('UPDATE Masterfile SET Field3=(SELECT Tbl2 FROM field1 WHERE Masterfile.field2=Tbl2.field5);')
+conn.commit()
+
+import sqlite3
+conn = sqlite3.connect("SLMDB")
+cur = conn.cursor()
+
+qry1="""
+SELECT * FROM Masterfile
+WHERE Field3=<>'NA'
+"""
+Umaster=pd.read_sql(qry1, conn)
+
+
+### SQLEND 
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#For Loop
+items = ['col1', 'col2', 'col3', 'col4', 'col5']
+for i in range(len(items)):
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Fillna
+df7[colsdf] = df7[cols1].fillna("TBH")
+
+#Filter Data , Field equals to 1
+df1 = df[(df['field'] == int(1))]
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Drop Duplicates
+df = df.drop_duplicates()
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Concat files df1 & df2
+df3= pd.concat([df2, df1], ignore_index = True)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Convert 2 columns into list 
+df={Name:['x','y','z']; userid:['x1','y1','z1'];}
+df1=pd.DataFrame(df)
+df2=df1.values.tolist()
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+# iterow and index in loop
+for index, row in df.iterrows():
+	#do something
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Reverse the valie
+z.reverse()
+#Join the value
+rev=('/'.join(z))
+# Append the path
+field1.append(rev)
+
+--- -- -------------- -------------- ---------------------------------- --------------------
+#Find Keyword and replace in the string or Pharagraph from 2 dataframe (With help of Flashtext or legecy method)
+
+########### Legacy Method 
+
+df1 = [dataframe contains all columns, where in one columns(fieldX) which you have keyword or word in paragraphs where you need to replace]
+df2 = df[['Field1(Key word to find)','Fiedl2(Replace word)']]
+
+for find_word, replace in df2.itertuples(index=False):
+    for ind in df1.index:
+        s=df1['fieldX'][ind]
+               
+        n=s.find(find_word)
+        if n!= -1:
+            while(n!=-1):
+                substring = s[0:n]
+                substring = substring + replace
+                substring =substring+s[n+len(find_word):]
+                n=s.find(find_word,n+1,len(s))
+                df1['fieldX'][ind]=substring
+
+########## Flashtext library Method 
+
+import flashtext
+processor = flashtext.KeywordProcessor()
+
+for k, v in df2.items():
+    processor.add_keyword(k, v)
+df1['fieldX']=list(map(processor.replace_keywords, df1['fieldX']))
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#For Sorting by 2 columns or many columns
+ 
+df.sort_values(by=['Field1','Field2'], inplace=True, ascending=True)
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+# Hierarchy chart building by networkx library
+
+
+import sqlite3, pandas as pd
+con=sqlite3.connect('DBname.db')
+qry="""
+SELECT EmployeeId, FirstName, ReportsTo
+FROM employees
+"""
+emps=pd.read_sql(qry, con)
+
+edgelist=pd.merge(emps, emps, left_on='EmployeeId', right_on='ReportsTo')
+edgelist.rename(columns={'FirstName_x' :'from', 'FirstName_y' :'to'},inplace=True)
+edgelist=edgelist[['from', 'to']]
+
+import networkx as nx
+orgchart=nx.from_pandas_edgelist(edgelist, 
+source='from', target='to')
+
+p=nx.drawing.nx_pydot.to_pydot(orgchart)
+p.write_png('orgchart.png')
+        
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+
+# using list comprehension + defaultdict + lambda
+# Gives unique number of manager and reporting empl..
+
+from collections import defaultdict
+# initializing list
+test_list = UserMaster['ManagerEmail']
+temp = defaultdict(lambda: len(temp))
+res = [temp[ele] for ele in test_list]
+UserMaster['MngrId']=res
+
+test_list5 = UserMaster['Email']
+temp5 = defaultdict(lambda: len(temp5))
+res5 = [temp5[ele5] for ele5 in test_list5]
+UserMaster['AliasId']=res5
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+# ReplaceValues in Column names
+
+import pandas as pd
+import numpy as np
+df=pd.read_csv(r'C:\XX\Data\Master.csv',encoding='ISO-8859-1')
+df.columns=df.columns.str.replace(':','')
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Add new blank columns in df
+df['Field Z']=''
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Update df fields with where conditions 
+
+df['Field Z'] = np.where((df.field1.str.contains("Sales Consultant")|
+                       df.field1.str.contains("Sales Dev")|
+                       df.field1.str.contains("Sales Engineering")|                       
+                       df.field1.str.contains("Sales Rep")|
+                       df.field1.str.contains("Sales Associate")) &  
+                       (df.field2.eq("Sam Sales")), "Business Development team","")
+
+df['IsMGR'] = np.where(df['No_of_Reportees'] > 0, "Yes", "No")
+df['No_of_Reportees'] = df['No_of_Reportees'].replace(np.nan, '')
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Find column value as criteria matches the another column+count number of records and update another column
+# to find count of reporting team members under the manager
+cnt = df.groupby('Managername').apply(lambda x: (x.user == x.Managername).count())
+df['No_of_Reportees'] = df.user.map(cnt)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+
+#IF MGR NAME = “Blank”; THEN [MGR STATUS] = “No Manager”
+#IF MGR NAME <> “Blank” AND MGR [Active = 0]; Then [MGR STATUS] = “Mgr Inactive”; Else [MGR STATUS] = “Mgr Active”
+conditions = [
+    ((df['MgrName'] != None) & (df['MgrActive'] == 1)),
+    (((df['MgrName'] != None) & (df['MgrActive'] == 0))),
+    ((df['MgrName'] == '')),
+    ((df['MgrActive'] == '') | (df['MgrStatus'] == '' ))]
+choices = ['Mgr Active','Mgr Inactive','No Manager','Doubt']
+df['MgrStatus'] = np.select(conditions, choices)
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
