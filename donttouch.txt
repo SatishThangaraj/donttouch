@@ -221,3 +221,30 @@ choices = ['Mgr Active','Mgr Inactive','No Manager','Doubt']
 df['MgrStatus'] = np.select(conditions, choices)
 
 --- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Get Unique Values of the column
+df.fieldname.unique()
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Creating dataframe from dictonary Stages
+stage=['3 - Opportunity Qualification','4 - Winning Strategy','5 - Finalising the Solution','6 - Proposing','7 - Formalising Agreement','S - Sold','Q - Capgemini Qualified Out','D - Dropped','L - Lost']
+	#F = Funnel , S = Sold, Q = Qulifying , D = Dropped, L = Lost 
+stagetype=['F','F','F','F','F','S','Q','D','L']
+# Create a zip object from two lists
+zipbObj = zip(stage, stagetype)
+# Create a dictionary from zip object
+stagetbl = dict(zipbObj)
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+# Find first charecter of the columns names 
+stg['NewfieldName'] = df['Field1'].astype(str).str[0]
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+# Delete the row where contains creteria 
+
+index_names = df[(df['Active'] == 0)].index
+df.drop(index_names, inplace = True)
+
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
+#Dictionary to Dataframe
+df = pd.Series(bill_to_unit).to_frame()
+df.reset_index(level=0, inplace=True)
+df.rename(columns = {'index':'BillingUnit', 0:'Userunit'}, inplace = True)
+--- - - - - - - - - - - - - - - - - - - - -------------------------------
